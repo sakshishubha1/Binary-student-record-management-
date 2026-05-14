@@ -8,7 +8,7 @@ void addstudent(){
     FILE *fp=fopen("student.dat","ab");
     if(fp==NULL){
         printf("EROR OPENING FILE");
-        return 1;
+        return ;
     }
     Student s;
     getchar();
@@ -25,7 +25,7 @@ void addstudent(){
         FILE *fp=fopen("student.dat","rb");
         if(fp==NULL){
             printf("EROR OPENING FILE");
-            return 1;
+            return ;
         }
      printf("displaying students");
      int Student s1;
@@ -36,7 +36,26 @@ void addstudent(){
     fclose(fp);
 }
 
+
+void search(){
+    FILE *fp=fopen("student.dat","rb");
+    if(fp==NULL){
+        printf("RECORD NOT FOUND");
+        return ;
+    }
+    char name[50];
+    printf("Enter name");
+    scanf("%s",name);
+    Student s2;
+while(fread(&s2,sizeof(s2),1,fp)==1){
+       if(strcmp(name,s2.name)==0){
+          printf("%s %d %d",s2.name,s2.roll,s2.marks);
+            }
+}
+fclose(fp);
+}
     int main{
+        printf("")
 
     
 
