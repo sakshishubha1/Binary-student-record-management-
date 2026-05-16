@@ -1,4 +1,5 @@
-include<stdio.h>
+#include<stdio.h>
+#include<string.h>
 typedef struct{
     char name[100];
     int roll;
@@ -11,12 +12,12 @@ void addstudent(){
         return ;
     }
     Student s;
-    getchar();
     printf("Enter name");
-    fgets(s.name,sizeof(s.name),stdin);
+    scanf("%s",s.name);
     printf("Enter roll no");
     scanf("%d",&s.roll);
-    printf("Enter marks",&s.marks);
+    printf("Enter marks");
+    scanf("%d",&s.marks);
     fwrite(&s,sizeof(s),1,fp);
     fclose(fp);
     printf("Student added ");
@@ -28,7 +29,7 @@ void addstudent(){
             return ;
         }
      printf("displaying students");
-     int Student s1;
+      Student s1;
     while(fread(&s1,sizeof(s1),1,fp)==1){
     printf("%s %d %d",s1.name,s1.roll,s1.marks);
     printf("--------------------");
@@ -43,22 +44,47 @@ void search(){
         printf("RECORD NOT FOUND");
         return ;
     }
+    int found=0;
     char name[50];
     printf("Enter name");
     scanf("%s",name);
     Student s2;
 while(fread(&s2,sizeof(s2),1,fp)==1){
        if(strcmp(name,s2.name)==0){
+        found=1;
           printf("%s %d %d",s2.name,s2.roll,s2.marks);
             }
 }
+if(found==0){
+    printf("record not found");
+}
 fclose(fp);
 }
-    int main{
-        printf("")
-
-    
-
-
-    
+    int main(){
+        while(1){
+        int n;
+       printf("1. Enter Data\n");
+      printf("2. View All Data\n");
+      printf("3. Search\n");
+      printf("4. Exit\n");
+      printf("Enter choice:\n ");
+        scanf("%d",&n);
+        switch(n){
+            case 1:
+            addstudent();
+            break;
+            case 2:
+            viewstudent();
+            break;
+            case 3:
+            search();
+            break;
+            case 4:
+            printf("EXITING....");
+            return 0;
+            default:
+            printf("Eror, wrong choice");
+            break;
+        }    
 }
+    }
